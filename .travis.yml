@@ -14,3 +14,5 @@ android:
 licenses:
     - 'android-sdk-license-.+'
 script: ./gradlew assemble
+notifications:
+    slack: post2shyam:1szenHzyMD0Yk5PISyepu4Fw
