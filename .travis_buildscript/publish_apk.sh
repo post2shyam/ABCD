@@ -1,0 +1,1 @@
+echo "TODO: Upload the apk to app center"
