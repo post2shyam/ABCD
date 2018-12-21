@@ -1,5 +1,10 @@
 language: android
 jdk: oraclejdk8
+addons:
+  apt:
+    packages:
+    # Updates JDK 8 to the latest available.
+      - oracle-java8-installer
 sudo: false
 android:
   components:
@@ -17,3 +22,6 @@ script: ./gradlew assemble
 notifications:
     email: false
     slack: post2shyam:1szenHzyMD0Yk5PISyepu4Fw
+after_success:
+    # Upload to app center
+    - .travis_buildscript/publish_apk.sh
