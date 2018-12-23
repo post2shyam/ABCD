@@ -13,6 +13,12 @@ upload_url=$(echo  ${urlRequestRspJson} | jq --raw-output '.upload_url')
 echo ${upload_id}
 echo ${upload_url}
 
+echo "Present working dir"
+pwd
+
+echo "ls"
+ls -al
+
 #Upload the apk file to the upload the url
 uploadRspJson=$(curl -F "ipa=@../app/build/outputs/apk/release/app-release-unsigned.apk" ${upload_url})
 
