@@ -9,6 +9,7 @@ import com.post2shyam.abcd.internal.dagger.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -16,6 +17,9 @@ class MainApplication : Application(), HasActivityInjector {
 
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+
+    @Inject
+    lateinit var timberTree: Timber.Tree
 
 
     // this is required to setup Dagger2 for Activity
@@ -25,7 +29,12 @@ class MainApplication : Application(), HasActivityInjector {
     override fun onCreate() {
         super.onCreate()
         initDagger()
+        initLogger()
         initAppCenter()
+    }
+
+    private fun initLogger() {
+        Timber.plant(timberTree)
     }
 
     private fun initDagger() {
