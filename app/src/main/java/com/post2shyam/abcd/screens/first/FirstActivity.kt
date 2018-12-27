@@ -22,7 +22,7 @@ class FirstActivity : BaseActivity() {
         //Local store transactions
         persistentStoreManager.setRollNumber(90)
 
-        //Will appear only in debug app flavor
+        //Will appear under debug app flavor
         Timber.d("Persisted RollNo is %d", persistentStoreManager.getRollNumber())
 
         //Will appear in all app flavors
