@@ -17,6 +17,9 @@ class FirstActivity : BaseActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first)
+
+        //Local store transactions
+        persistentStoreManager.setRollNumber(90)
         persistentStoreManager.getRollNumber()
     }
 }
