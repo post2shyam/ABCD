@@ -26,6 +26,7 @@ class FirstActivity : BaseActivity() {
     //Will appear under debug app flavor
     Timber.v("Persisted RollNo is %d", persistentStoreManager.getRollNumber())
 
+    //Will log tview user clicks for analytics.
     hello_world_tview.setOnClickListener { view -> Timber.d("%s", view::class.simpleName) }
   }
 }
