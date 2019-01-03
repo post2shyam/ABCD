@@ -5,7 +5,7 @@ import com.post2shyam.abcd.R
 import com.post2shyam.abcd.screens.internal.BaseActivity
 import com.post2shyam.abcd.system.localstore.IPersistentStoreManager
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_first.*
+import kotlinx.android.synthetic.main.activity_first.hello_world_tview
 import timber.log.Timber
 import javax.inject.Inject
 
