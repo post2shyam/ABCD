@@ -4,8 +4,8 @@ import android.app.Application
 import com.post2shyam.abcd.BuildConfig
 import com.post2shyam.abcd.system.localstore.IPersistentStoreManager
 import com.post2shyam.abcd.system.localstore.internal.SharedPreferenceStoreManager
+import com.post2shyam.abcd.system.logger.AnalyticsLogTree
 import com.post2shyam.abcd.system.logger.DebugLogTree
-import com.post2shyam.abcd.system.logger.ReleaseLogTree
 import dagger.Module
 import dagger.Provides
 import timber.log.Timber
@@ -25,7 +25,7 @@ class SystemModule {
         return if (BuildConfig.DEBUG) {
             DebugLogTree()
         } else {
-            ReleaseLogTree()
+            AnalyticsLogTree()
         }
     }
     //TODO: Add more systemscope providers here
