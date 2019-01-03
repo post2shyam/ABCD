@@ -5,7 +5,7 @@ import com.post2shyam.abcd.R
 import com.post2shyam.abcd.screens.internal.BaseActivity
 import com.post2shyam.abcd.system.localstore.IPersistentStoreManager
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_first.hello_world_tview
+import kotlinx.android.synthetic.main.activity_first.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,6 +27,6 @@ class FirstActivity : BaseActivity() {
     Timber.v("Persisted RollNo is %d", persistentStoreManager.getRollNumber())
 
     //Will log tview user clicks for analytics.
-    hello_world_tview.setOnClickListener { view -> Timber.d("%s", view::class.simpleName) }
+    hello_world_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
   }
 }
