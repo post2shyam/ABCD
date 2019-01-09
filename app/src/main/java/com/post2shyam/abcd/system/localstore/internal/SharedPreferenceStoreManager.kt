@@ -7,18 +7,19 @@ import com.post2shyam.abcd.system.localstore.IPersistentStoreManager
 
 class SharedPreferenceStoreManager(application: Application) : IPersistentStoreManager {
 
-    private val sharedPreferences = application.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
+  private val sharedPreferences =
+    application.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
 
-    private val sharedPrefEditor = sharedPreferences.edit()
+  private val sharedPrefEditor = sharedPreferences.edit()
 
-    private val ROLE_KEY = "ROLE_KEY"
+  private val ROLE_KEY = "ROLE_KEY"
 
-    override fun setRollNumber(rollNumber: Int) {
-        sharedPrefEditor.putInt(ROLE_KEY, rollNumber)
-        sharedPrefEditor.apply()
-    }
+  override fun setRollNumber(rollNumber: Int) {
+    sharedPrefEditor.putInt(ROLE_KEY, rollNumber)
+    sharedPrefEditor.apply()
+  }
 
-    override fun getRollNumber(): Int {
-        return sharedPreferences.getInt(ROLE_KEY, 0)
-    }
+  override fun getRollNumber(): Int {
+    return sharedPreferences.getInt(ROLE_KEY, 0)
+  }
 }

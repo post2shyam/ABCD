@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.first.FirstActivity"
+    tools:context=".screens.first.NetworkActivity"
     >
 
   <TextView
@@ -13,11 +13,25 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:tag="Hello World"
-      android:text="@string/hello_world"
+      android:text="@string/network_world"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <android.support.v7.widget.AppCompatButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/material_dimen8"
+      android:layout_marginEnd="@dimen/material_dimen8"
+      android:layout_marginStart="@dimen/material_dimen8"
+      android:layout_marginTop="@dimen/material_dimen8"
+      android:text="@string/fetch_data"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/hello_world_tview"
       />
 
 </android.support.constraint.ConstraintLayout>
