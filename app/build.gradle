@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //NOTE: https://stackoverflow.com/questions/52518378/more-than-one-file-was-found-with-os-independent-path-meta-inf-proguard-android/52523819
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
 }
 
 dependencies {
@@ -44,6 +48,11 @@ dependencies {
     implementation "com.google.dagger:dagger-android:${daggerVersion}"
     implementation "com.google.dagger:dagger-android-support:${daggerVersion}" // if you use the support libraries
     kapt "com.google.dagger:dagger-android-processor:${daggerVersion}"
+
+    //Reactive framework
+    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    implementation "com.jakewharton.rxbinding3:rxbinding:${rxBindingVersion}"
 
     //Logger
     implementation "com.jakewharton.timber:timber:${timberVersion}"
