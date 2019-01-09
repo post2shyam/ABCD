@@ -3,10 +3,13 @@ package com.post2shyam.abcd.screens.internal
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.post2shyam.abcd.system.localstore.IPersistentStoreManager
+import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 import javax.inject.Inject
 
 open class BaseActivity : AppCompatActivity() {
+
+    val compositeDisposable = CompositeDisposable()
 
     @Inject
     lateinit var persistentStoreManager: IPersistentStoreManager
@@ -20,5 +23,11 @@ open class BaseActivity : AppCompatActivity() {
 
         //Will appear under debug app flavor
         Timber.v("Persisted RollNo is %d", persistentStoreManager.getRollNumber())
+    }
+
+    override fun onDestroy() {
+        //Free the memory
+        compositeDisposable.dispose()
+        super.onDestroy()
     }
 }
