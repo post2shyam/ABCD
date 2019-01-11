@@ -44,7 +44,6 @@ class MainScreen : BaseActivity() {
           dirbleRadioDirectoryServices.popularStations()
               .subscribeOn(Schedulers.io())
         }
-        .doOnNext { Timber.d("Okk") }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { it: Array<PopularStationsRsp>? -> Timber.d("%s", it?.get(0)?.name) })
   }
