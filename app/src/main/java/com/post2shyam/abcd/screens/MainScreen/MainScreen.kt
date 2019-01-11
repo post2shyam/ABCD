@@ -40,17 +40,12 @@ class MainScreen : BaseActivity() {
 
     compositeDisposable.add(start_button.clicks()
         .debounce(200, MILLISECONDS)
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe {
-          Timber.d("Clicked")
+        .switchMap {
           dirbleRadioDirectoryServices.popularStations()
               .subscribeOn(Schedulers.io())
-              .observeOn(AndroidSchedulers.mainThread())
-              .subscribe { it: Array<PopularStationsRsp>? -> Timber.d("%s", it?.get(0)?.name) }
-//              .subscribe {popularStationRsp: PopularStationsRsp? ->  Timber.d("%s",
-//                  popularStationRsp?.name
-//              )}
-
-        })
+        }
+        .doOnNext { Timber.d("Okk") }
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe { it: Array<PopularStationsRsp>? -> Timber.d("%s", it?.get(0)?.name) })
   }
 }
