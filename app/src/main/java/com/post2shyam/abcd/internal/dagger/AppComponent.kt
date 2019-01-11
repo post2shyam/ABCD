@@ -1,6 +1,7 @@
 package com.post2shyam.abcd.internal.dagger
 
 import android.app.Application
+import com.post2shyam.abcd.backend.dirble.internal.dagger.DirbleBackendModule
 import com.post2shyam.abcd.screens.internal.dagger.ActivityModule
 import com.post2shyam.abcd.system.internal.dagger.SystemModule
 import com.post2shyam.abcd.system.mainapplication.MainApplication
@@ -10,7 +11,11 @@ import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidInjectionModule::class, SystemModule::class, ActivityModule::class])
+@Component(
+    modules = [AndroidInjectionModule::class, SystemModule::class,
+      ActivityModule::class, DirbleBackendModule::class]
+)
+
 interface AppComponent {
   @Component.Builder
   interface Builder {

@@ -2,7 +2,7 @@ package com.post2shyam.abcd.screens.splash
 
 import android.os.Bundle
 import com.post2shyam.abcd.R
-import com.post2shyam.abcd.screens.first.NetworkActivity
+import com.post2shyam.abcd.screens.MainScreen.MainScreen
 import com.post2shyam.abcd.screens.internal.BaseActivity
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
@@ -22,6 +22,6 @@ class SplashActivity : BaseActivity() {
         //Launch first activity after 2 seconds
         compositeDisposable.add(Observable.timer(TIMEOUT_INTERVAL, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { NetworkActivity.launch(this@SplashActivity) })
+            .subscribe { MainScreen.launch(this@SplashActivity) })
     }
 }
