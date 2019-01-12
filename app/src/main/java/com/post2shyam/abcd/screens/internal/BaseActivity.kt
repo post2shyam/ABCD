@@ -9,25 +9,25 @@ import javax.inject.Inject
 
 open class BaseActivity : AppCompatActivity() {
 
-    val compositeDisposable = CompositeDisposable()
+  val compositeDisposable = CompositeDisposable()
 
-    @Inject
-    lateinit var persistentStoreManager: IPersistentStoreManager
+  @Inject
+  lateinit var persistentStoreManager: IPersistentStoreManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Timber.i("%s", this::class.simpleName)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    Timber.i("%s", this::class.simpleName)
 
-        //Injection works in Base calls
-        persistentStoreManager.setRollNumber(20)
+    //Injection works in Base calls
+    persistentStoreManager.setRollNumber(20)
 
-        //Will appear under debug app flavor
-        Timber.v("Persisted RollNo is %d", persistentStoreManager.getRollNumber())
-    }
+    //Will appear under debug app flavor
+    Timber.v("Persisted RollNo is %d", persistentStoreManager.getRollNumber())
+  }
 
-    override fun onDestroy() {
-        //Free the memory
-        compositeDisposable.dispose()
-        super.onDestroy()
-    }
+  override fun onDestroy() {
+    //Free the memory
+    compositeDisposable.dispose()
+    super.onDestroy()
+  }
 }

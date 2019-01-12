@@ -1,5 +1,8 @@
 <resources>
-  <string name="app_name">ABCD</string>
-  <string name="hello_world">Hello World!!</string>
+  <string name="app_name">MuzikSTREEM</string>
+  <string name="dirble_token">Enter MuzikSTREEM</string>
   <string name="splash">Splash !</string>
+  <string name="start">Start</string>
+  <string name="token">Token</string>
+  <string name="password">Password</string>
 </resources>

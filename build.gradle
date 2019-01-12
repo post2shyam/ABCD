@@ -36,4 +36,6 @@ ext {
     rxJavaVersion = '2.2.5'
     rxAndroidVersion = '2.1.0'
     rxBindingVersion = '3.0.0-alpha2'
+    retrofitVersion = '2.5.0'
+    okHttpVersion = '3.12.1'
 }

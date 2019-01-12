@@ -13,20 +13,20 @@ import javax.inject.Singleton
 
 @Module
 class SystemModule {
-    @Singleton
-    @Provides
-    fun providePersistentStoreManager(application: Application): IPersistentStoreManager {
-        return SharedPreferenceStoreManager(application)
-    }
+  @Singleton
+  @Provides
+  fun providePersistentStoreManager(application: Application): IPersistentStoreManager {
+    return SharedPreferenceStoreManager(application)
+  }
 
-    @Singleton
-    @Provides
-    fun provideTimberLogTree(): Timber.Tree {
-        return if (BuildConfig.DEBUG) {
-            DebugLogTree()
-        } else {
-            AnalyticsLogTree()
-        }
+  @Singleton
+  @Provides
+  fun provideTimberLogTree(): Timber.Tree {
+    return if (BuildConfig.DEBUG) {
+      DebugLogTree()
+    } else {
+      AnalyticsLogTree()
     }
-    //TODO: Add more systemscope providers here
+  }
+  //TODO: Add more systemscope providers here
 }
