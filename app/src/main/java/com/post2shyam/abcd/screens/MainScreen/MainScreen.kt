@@ -9,6 +9,7 @@ import com.post2shyam.abcd.R
 import com.post2shyam.abcd.backend.dirble.interactions.response.PopularStationsRsp
 import com.post2shyam.abcd.backend.dirble.internal.DirbleRadioDirectoryServices
 import com.post2shyam.abcd.screens.internal.BaseActivity
+import com.post2shyam.abcd.utils.addTo
 import dagger.android.AndroidInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -47,7 +48,7 @@ class MainScreen : BaseActivity() {
     //Will log tview user clicks for analytics.
     hello_world_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
 
-    compositeDisposable.add(start_button.clicks()
+    start_button.clicks()
       .debounce(200, MILLISECONDS)
       .switchMap {
         dirbleRadioDirectoryServices.popularStations()
@@ -58,12 +59,13 @@ class MainScreen : BaseActivity() {
             mediaPlayer.apply {
               setAudioStreamType(AudioManager.STREAM_MUSIC)
               setDataSource(url)
-              prepare() // might take long! (for buffering, etc)
+              prepare() // takes long! (for buffering, etc)
               start()
             }
           }
       }
       .observeOn(AndroidSchedulers.mainThread())
-      .subscribe())
+      .subscribe()
+      .addTo(compositeDisposable)
   }
 }
