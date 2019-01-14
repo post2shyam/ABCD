@@ -1,4 +1,4 @@
-package com.post2shyam.abcd.screens.MainScreen
+package com.post2shyam.abcd.screens.main
 
 import android.content.Intent
 import android.media.AudioManager
@@ -65,7 +65,7 @@ class MainScreen : BaseActivity() {
           }
       }
       .observeOn(AndroidSchedulers.mainThread())
-      .doOnError { Timber.e("%s", "Error loading the stream", it.) }
+      .doOnError { Timber.e(it.cause) }
       .subscribe()
       .addTo(compositeDisposable)
   }
