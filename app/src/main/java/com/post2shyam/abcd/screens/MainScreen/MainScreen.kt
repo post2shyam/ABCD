@@ -65,6 +65,7 @@ class MainScreen : BaseActivity() {
           }
       }
       .observeOn(AndroidSchedulers.mainThread())
+      .doOnError { Timber.e("%s", "Error loading the stream", it.) }
       .subscribe()
       .addTo(compositeDisposable)
   }
