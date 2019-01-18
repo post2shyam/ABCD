@@ -1,6 +1,6 @@
 package com.post2shyam.abcd.screens.internal.dagger
 
-import com.post2shyam.abcd.screens.MainScreen.MainScreen
+import com.post2shyam.abcd.screens.main.MainScreen
 import com.post2shyam.abcd.screens.splash.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

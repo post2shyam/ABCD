@@ -9,16 +9,14 @@ class DirbleRequestInterceptor(private val token: String) : Interceptor {
     val request = chain.request()
 
     val url = request.url()
-        .newBuilder()
-        .addQueryParameter("token", token)
-        .build()
+      .newBuilder()
+      .addQueryParameter("token", token)
+      .build()
 
     val newRequest = request.newBuilder()
-        .url(url)
-        .build()
+      .url(url)
+      .build()
 
-    val response = chain.proceed(newRequest)
-
-    return response
+    return chain.proceed(newRequest)
   }
 }
