@@ -9,7 +9,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
-class SplashActivity : BaseActivity() {
+class Splash : BaseActivity() {
 
     private val TIMEOUT_INTERVAL = 2L
 
@@ -22,6 +22,6 @@ class SplashActivity : BaseActivity() {
         //Launch first activity after 2 seconds
         compositeDisposable.add(Observable.timer(TIMEOUT_INTERVAL, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { MainScreen.launch(this@SplashActivity) })
+            .subscribe { MainScreen.launch(this@Splash) })
     }
 }
