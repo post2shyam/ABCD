@@ -70,6 +70,34 @@ interface DirbleRadioDirectoryServices {
         @Query("per_page") perPage: Int,
         @Query("offset") offset: Int
     ): Observable<Array<StationsWithCategoryRsp>>
+
+    ////////////  Countries - API ////////////////
+
+    //Get all countries
+    @GET("countries")
+    fun getCountryList(): Observable<Array<CountryListRsp>>
+
+    //Get all continents
+    @GET("continents")
+    fun getContinentList(): Observable<Array<ContinentListRsp>>
+
+    //Get countries in continent
+    @GET("continents/{continentId}/countries")
+    fun getCountryListForContinent(
+        @Path("continentId") continentId: Int,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int,
+        @Query("offset") offset: Int
+    ): Observable<Array<CountryListRsp>>
+
+    //Get all stations of country
+    @GET("countries/{countryCode}/stations")
+    fun getAllStationOfCountry(
+        @Path("countryCode") countryCode: String,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int,
+        @Query("offset") offset: Int
+    ): Observable<Array<PopularStationsRsp>>
 }
 
 
