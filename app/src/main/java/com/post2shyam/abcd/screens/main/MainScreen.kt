@@ -13,8 +13,7 @@ import com.post2shyam.abcd.utils.addTo
 import dagger.android.AndroidInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_mainscreen.hello_world_tview
-import kotlinx.android.synthetic.main.activity_mainscreen.start_button
+import kotlinx.android.synthetic.main.activity_mainscreen.*
 import timber.log.Timber
 import java.util.concurrent.TimeUnit.MILLISECONDS
 import javax.inject.Inject
@@ -51,7 +50,7 @@ class MainScreen : BaseActivity() {
     start_button.clicks()
       .debounce(200, MILLISECONDS)
       .switchMap {
-        dirbleRadioDirectoryServices.popularStations()
+        dirbleRadioDirectoryServices.popularStations(0, 10, 0)
           .subscribeOn(Schedulers.io())
           .doOnNext { popularRadioStations: Array<PopularStationsRsp>? ->
             Timber.d("Ok")

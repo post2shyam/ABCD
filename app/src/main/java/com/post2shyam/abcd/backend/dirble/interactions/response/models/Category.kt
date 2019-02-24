@@ -2,7 +2,7 @@ package com.post2shyam.abcd.backend.dirble.interactions.response.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Categories(
+data class Category(
 
   @SerializedName("id") val id: Int,
   @SerializedName("title") val title: String,
