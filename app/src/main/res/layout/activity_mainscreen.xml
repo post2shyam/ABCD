@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,29 +8,31 @@
     tools:context=".screens.main.MainScreen"
     >
 
-  <TextView
+  <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/hello_world_tview"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
       android:text="@string/dirble_token"
       android:textSize="@dimen/material_size_16"
+      app:layout_constraintBottom_toTopOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"
       />
 
+  <androidx.recyclerview.widget.RecyclerView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/hello_world_tview"
+  />
 
-  <android.support.v7.widget.AppCompatButton
+
+  <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/start_button"
       android:layout_width="wrap_content"
       android:layout_height="52dp"
-      android:layout_marginBottom="@dimen/material_dimen8"
-      android:layout_marginEnd="@dimen/material_dimen8"
-      android:layout_marginStart="@dimen/material_dimen8"
       android:text="@string/start"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
       />
-
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
