@@ -6,42 +6,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.main.MainScreen"
-    >
-
-  <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/app_name_tview"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          android:text="@string/dirble_token"
-          android:textSize="@dimen/material_size_16"
-          app:layout_constraintBottom_toTopOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-      />
+>
 
   <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/popular_station_list"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="8dp"
-          android:layout_marginTop="8dp"
-          app:layout_constraintBottom_toTopOf="@+id/start_button"
-          app:layout_constraintTop_toBottomOf="@+id/app_name_tview"
+      android:id="@+id/popular_station_list"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
   />
 
 
   <androidx.appcompat.widget.AppCompatButton
-          android:id="@+id/start_button"
-          android:layout_width="wrap_content"
-          android:layout_height="52dp"
-          android:layout_marginBottom="8dp"
-          android:layout_marginEnd="8dp"
-          android:layout_marginStart="8dp"
-          android:text="@string/start"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-      />
+      android:id="@+id/start_button"
+      android:layout_width="wrap_content"
+      android:layout_height="52dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginStart="8dp"
+      android:visibility="gone"
+      android:text="@string/start"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+  />
 </androidx.constraintlayout.widget.ConstraintLayout>

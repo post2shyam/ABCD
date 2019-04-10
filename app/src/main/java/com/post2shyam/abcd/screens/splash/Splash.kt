@@ -11,17 +11,16 @@ import java.util.concurrent.TimeUnit
 
 class Splash : BaseActivity() {
 
-    override val layoutRes: Int
-        get() = R.layout.activity_splash
+  override val layoutRes = R.layout.activity_splash
 
-    private val TIMEOUT_INTERVAL = 2L
+  private val timeout_interval = 2L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         //Launch first activity after 2 seconds
-        compositeDisposable.add(Observable.timer(TIMEOUT_INTERVAL, TimeUnit.SECONDS)
+      compositeDisposable.add(Observable.timer(timeout_interval, TimeUnit.SECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { MainScreen.launch(this@Splash) })
     }

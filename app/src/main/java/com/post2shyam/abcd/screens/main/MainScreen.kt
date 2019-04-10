@@ -14,14 +14,12 @@ import com.post2shyam.abcd.utils.addTo
 import dagger.android.AndroidInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_mainscreen.*
 import timber.log.Timber
 import javax.inject.Inject
 
 class MainScreen : BaseActivity() {
 
-  override val layoutRes: Int
-    get() = R.layout.activity_mainscreen
+  override val layoutRes = R.layout.activity_mainscreen
 
   @BindView(R.id.popular_station_list)
   lateinit var popularStationList: RecyclerView
@@ -51,7 +49,7 @@ class MainScreen : BaseActivity() {
     initUi()
 
     //Will log tview user clicks for analytics.
-    app_name_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
+    //app_name_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
 
 //    start_button.clicks()
 //        .debounce(200, MILLISECONDS)

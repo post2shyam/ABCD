@@ -7,7 +7,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/station_name"
-            android:layout_width="@dimen/material_dimen56"
+        android:layout_width="match_parent"
             android:layout_height="@dimen/material_dimen56"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -28,7 +28,6 @@ class PopularStationAdapter(private val popularStationList: Array<PopularStation
     class PopularStationViewHolder(parentView: View) : RecyclerView.ViewHolder(parentView) {
         @BindView(R.id.station_name)
         lateinit var stationName: AppCompatTextView
-
         init {
             ButterKnife.bind(this, parentView)
         }
