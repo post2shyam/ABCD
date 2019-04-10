@@ -44,4 +44,5 @@ ext {
     calligraphyVersion = '3.1.0'
     viewPumpVersion = '1.0.0'
     butterknifeVersion = '10.1.0'
+    picassoLibVersion = '2.71828'
 }
