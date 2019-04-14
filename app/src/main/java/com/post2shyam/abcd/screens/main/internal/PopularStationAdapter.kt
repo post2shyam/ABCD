@@ -32,6 +32,7 @@ class PopularStationAdapter(private val popularStationList: Array<PopularStation
     override fun getItemCount(): Int = popularStationList.size
 
     class PopularStationViewHolder(parentView: View) : RecyclerView.ViewHolder(parentView) {
+
         @BindView(R.id.station_name)
         lateinit var stationName: AppCompatTextView
 
