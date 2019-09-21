@@ -15,13 +15,13 @@ class Splash : BaseActivity() {
 
   private val timeout_interval = 2L
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    AndroidInjection.inject(this)
+    super.onCreate(savedInstanceState)
 
-        //Launch first activity after 2 seconds
-      compositeDisposable.add(Observable.timer(timeout_interval, TimeUnit.SECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { MainScreen.launch(this@Splash) })
-    }
+    //Launch first activity after 2 seconds
+    compositeDisposable.add(Observable.timer(timeout_interval, TimeUnit.SECONDS)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe { MainScreen.launch(this@Splash) })
+  }
 }
