@@ -1,6 +1,5 @@
 package com.post2shyam.abcd.system.mainapplication
 
-import android.app.Activity
 import android.app.Application
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
@@ -9,7 +8,7 @@ import com.post2shyam.abcd.R
 import com.post2shyam.abcd.internal.dagger.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
@@ -18,16 +17,19 @@ import javax.inject.Inject
 
 private const val DEFAULT_FONT = "fonts/Roboto-RobotoRegular.ttf"
 
-class MainApplication : Application(), HasActivityInjector {
+class MainApplication : Application(), HasAndroidInjector {
 
     @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    lateinit var activityInjector: DispatchingAndroidInjector<Any>
 
     @Inject
     lateinit var timberTree: Timber.Tree
 
+
     // this is required to setup Dagger2 for Activity
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
+    override fun androidInjector(): AndroidInjector<Any> {
+        return activityInjector
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -55,9 +57,9 @@ class MainApplication : Application(), HasActivityInjector {
     }
 
     private fun initDagger() {
-        DaggerAppComponent.builder()
-            .application(this)
-            .build()
+        DaggerAppComponent
+            .factory()
+            .create(this)
             .inject(this)
     }
 

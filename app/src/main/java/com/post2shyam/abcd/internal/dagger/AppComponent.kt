@@ -12,18 +12,18 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [AndroidInjectionModule::class, SystemModule::class,
-      ActivityModule::class, DirbleBackendModule::class]
+    modules = [AndroidInjectionModule::class,
+        SystemModule::class,
+        ActivityModule::class,
+        DirbleBackendModule::class]
 )
 
 interface AppComponent {
-  @Component.Builder
-  interface Builder {
-    @BindsInstance
-    fun application(application: Application): Builder
 
-    fun build(): AppComponent
-  }
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance application: Application): AppComponent
+    }
 
-  fun inject(mainApplication: MainApplication)
+    fun inject(mainApplication: MainApplication)
 }
