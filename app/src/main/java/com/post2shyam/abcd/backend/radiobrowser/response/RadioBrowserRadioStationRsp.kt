@@ -3,7 +3,7 @@ package com.post2shyam.abcd.backend.radiobrowser.response
 import com.google.gson.annotations.SerializedName
 
 
-data class RadioBrowserTopVotedRadioRsp(
+data class RadioBrowserRadioStationRsp(
     @SerializedName("bitrate")
     val bitrate: String,
 
