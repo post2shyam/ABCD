@@ -1,7 +1,7 @@
 package com.post2shyam.abcd.internal.dagger
 
 import android.app.Application
-import com.post2shyam.abcd.backend.dirble.internal.dagger.DirbleBackendModule
+import com.post2shyam.abcd.backend.radiobrowser.dagger.RadioBrowserBackendModule
 import com.post2shyam.abcd.screens.internal.dagger.ActivityModule
 import com.post2shyam.abcd.system.internal.dagger.SystemModule
 import com.post2shyam.abcd.system.mainapplication.MainApplication
@@ -15,7 +15,8 @@ import javax.inject.Singleton
     modules = [AndroidInjectionModule::class,
         SystemModule::class,
         ActivityModule::class,
-        DirbleBackendModule::class]
+//        DirbleBackendModule::class,
+        RadioBrowserBackendModule::class]
 )
 
 interface AppComponent {

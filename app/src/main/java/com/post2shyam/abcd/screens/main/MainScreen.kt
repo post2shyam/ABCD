@@ -3,13 +3,11 @@ package com.post2shyam.abcd.screens.main
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import com.post2shyam.abcd.R
-import com.post2shyam.abcd.backend.dirble.internal.DirbleRadioDirectoryServices
+import com.post2shyam.abcd.backend.radiobrowser.RadioBrowserDirectoryServices
 import com.post2shyam.abcd.screens.internal.BaseActivity
-import com.post2shyam.abcd.screens.main.internal.PopularStationAdapter
 import com.post2shyam.abcd.utils.addTo
 import dagger.android.AndroidInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,37 +17,40 @@ import javax.inject.Inject
 
 class MainScreen : BaseActivity() {
 
-  override val layoutRes = R.layout.activity_mainscreen
+    override val layoutRes = R.layout.activity_mainscreen
 
-  @BindView(R.id.popular_station_list)
-  lateinit var popularStationList: RecyclerView
+    @BindView(R.id.popular_station_list)
+    lateinit var popularStationList: RecyclerView
 
-  @Inject
-  lateinit var dirbleRadioDirectoryServices: DirbleRadioDirectoryServices
+//    @Inject
+//    lateinit var dirbleRadioDirectoryServices: DirbleRadioDirectoryServices
 
-  private val mediaPlayer = MediaPlayer()
+    @Inject
+    lateinit var radioBrowserDirectoryServices: RadioBrowserDirectoryServices
 
-  companion object {
-    fun launch(baseActivity: BaseActivity) {
-      val intent = Intent(baseActivity, MainScreen::class.java)
-      baseActivity.startActivity(intent)
-      baseActivity.finish()
+    private val mediaPlayer = MediaPlayer()
+
+    companion object {
+        fun launch(baseActivity: BaseActivity) {
+            val intent = Intent(baseActivity, MainScreen::class.java)
+            baseActivity.startActivity(intent)
+            baseActivity.finish()
+        }
     }
-  }
 
-  override fun onDestroy() {
-    mediaPlayer.release()
-    super.onDestroy()
-  }
+    override fun onDestroy() {
+        mediaPlayer.release()
+        super.onDestroy()
+    }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    AndroidInjection.inject(this)
-    super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
 
-    initUi()
+        initUi()
 
-    //Will log tview user clicks for analytics.
-    //app_name_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
+        //Will log tview user clicks for analytics.
+        //app_name_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
 
 //    start_button.clicks()
 //        .debounce(200, MILLISECONDS)
@@ -74,20 +75,35 @@ class MainScreen : BaseActivity() {
 //        .subscribe()
 //        .addTo(compositeDisposable)
 
-  }
+    }
 
-  private fun initUi() {
-    popularStationList.setHasFixedSize(true)
-    popularStationList.layoutManager = LinearLayoutManager(this@MainScreen)
 
-    dirbleRadioDirectoryServices.popularStations(0, 10, 0)
-      .subscribeOn(Schedulers.io())
-      .observeOn(AndroidSchedulers.mainThread())
-      .doOnNext {
-        popularStationList.adapter = PopularStationAdapter(it)
-      }
-      .doOnError { Timber.e(it.cause) }
-      .subscribe()
-      .addTo(compositeDisposable)
-  }
+    //Dirble.com is dead unfortunately !
+
+    //  private fun initUi() {
+//    popularStationList.setHasFixedSize(true)
+//    popularStationList.layoutManager = LinearLayoutManager(this@MainScreen)
+//
+//    dirbleRadioDirectoryServices.popularStations(0, 10, 0)
+//      .subscribeOn(Schedulers.io())
+//      .observeOn(AndroidSchedulers.mainThread())
+//      .doOnNext {
+//        popularStationList.adapter = PopularStationAdapter(it)
+//      }
+//      .doOnError { Timber.e(it.cause) }
+//      .subscribe()
+//      .addTo(compositeDisposable)
+//  }
+    private fun initUi() {
+        radioBrowserDirectoryServices.topVotedStations(5.toString())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext {
+                Timber.d("Length of data received = %d", it.size)
+            }
+            .doOnError { Timber.e(it.cause) }
+            .subscribe()
+            .addTo(compositeDisposable)
+
+    }
 }
