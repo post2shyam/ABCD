@@ -95,9 +95,10 @@ class MainScreen : BaseActivity() {
 //      .addTo(compositeDisposable)
 //  }
     private fun initUi() {
-        radioBrowserDirectoryServices.topVotedStations(5.toString())
+        radioBrowserDirectoryServices.getAllTags(true)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            //TODO: Now filter-out very popular tags and work on them only
             .doOnNext {
                 Timber.d("Length of data received = %d", it.size)
             }

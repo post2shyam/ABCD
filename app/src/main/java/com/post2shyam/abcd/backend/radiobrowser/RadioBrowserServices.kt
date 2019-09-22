@@ -33,8 +33,9 @@ interface RadioBrowserDirectoryServices {
 
 
     //Get all tags
-    @GET("tags")
-    fun getAllTags(): Observable<Array<RadioBrowserTagsRsp>>
+    @FormUrlEncoded
+    @POST("tags")
+    fun getAllTags(@Field("hidebroken") isBrokenHidden: Boolean): Observable<Array<RadioBrowserTagsRsp>>
 
 
     //Station APIS
