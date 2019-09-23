@@ -7,10 +7,10 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ActivityModule {
-    @ContributesAndroidInjector
-    internal abstract fun contributeFirstActivity(): MainScreen
+  @ContributesAndroidInjector
+  internal abstract fun contributeFirstActivity(): MainScreen
 
-    @ContributesAndroidInjector
-    internal abstract fun contributeSplashActivity(): Splash
-    // Add bindings for other sub-components here
+  @ContributesAndroidInjector
+  internal abstract fun contributeSplashActivity(): Splash
+  // Add bindings for other sub-components here
 }
