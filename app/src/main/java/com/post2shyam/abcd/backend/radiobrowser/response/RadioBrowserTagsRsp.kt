@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RadioBrowserTagsRsp(
     @SerializedName("stationcount")
-    val stationcount: String,
+    val stationCount: Int,
 
     @SerializedName("value")
     val tag: String

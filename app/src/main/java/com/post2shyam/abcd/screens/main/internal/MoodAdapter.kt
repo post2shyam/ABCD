@@ -33,7 +33,7 @@ class MoodAdapter : RecyclerView.Adapter<MoodAdapter.MoodViewHolder>() {
     moodViewHolder: MoodViewHolder,
     position: Int
   ) {
-    moodViewHolder.stationCount.text = moodList[position].stationcount
+    moodViewHolder.stationCount.text = moodList[position].stationCount.toString()
     moodViewHolder.mood.text = moodList[position].tag
   }
 

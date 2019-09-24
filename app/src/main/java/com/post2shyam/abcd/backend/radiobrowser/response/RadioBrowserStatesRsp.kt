@@ -7,7 +7,7 @@ data class RadioBrowserStatesRsp(
     @SerializedName("country")
     val country: String,
 
-    @SerializedName("stationcount")
+    @SerializedName("stationCount")
     val stationcount: String,
 
     @SerializedName("value")

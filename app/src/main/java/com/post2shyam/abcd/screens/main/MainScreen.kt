@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import com.post2shyam.abcd.R
 import com.post2shyam.abcd.backend.radiobrowser.RadioBrowserDirectoryServices
+import com.post2shyam.abcd.backend.radiobrowser.response.RadioBrowserTagsRsp
 import com.post2shyam.abcd.screens.internal.BaseActivity
 import com.post2shyam.abcd.screens.main.internal.MoodAdapter
 import com.post2shyam.abcd.utils.addTo
 import dagger.android.AndroidInjection
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -19,43 +21,45 @@ import javax.inject.Inject
 
 class MainScreen : BaseActivity() {
 
-  override val layoutRes = R.layout.activity_mainscreen
+    override val layoutRes = R.layout.activity_mainscreen
 
-  @BindView(R.id.mood_list)
-  lateinit var moodListView: RecyclerView
+    @BindView(R.id.mood_list)
+    lateinit var moodListView: RecyclerView
 
-  @Inject
-  lateinit var moodAdapter: MoodAdapter
+    @Inject
+    lateinit var moodAdapter: MoodAdapter
 
 //    @Inject
 //    lateinit var dirbleRadioDirectoryServices: DirbleRadioDirectoryServices
 
-  @Inject
-  lateinit var radioBrowserDirectoryServices: RadioBrowserDirectoryServices
+    @Inject
+    lateinit var radioBrowserDirectoryServices: RadioBrowserDirectoryServices
 
-  private val mediaPlayer = MediaPlayer()
+    private val mediaPlayer = MediaPlayer()
 
-  companion object {
-    fun launch(baseActivity: BaseActivity) {
-      val intent = Intent(baseActivity, MainScreen::class.java)
-      baseActivity.startActivity(intent)
-      baseActivity.finish()
+    companion object {
+        fun launch(baseActivity: BaseActivity) {
+            val intent = Intent(baseActivity, MainScreen::class.java)
+            baseActivity.startActivity(intent)
+            baseActivity.finish()
+        }
     }
-  }
 
-  override fun onDestroy() {
-    mediaPlayer.release()
-    super.onDestroy()
-  }
+    override fun onDestroy() {
+        mediaPlayer.release()
+        super.onDestroy()
+    }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    AndroidInjection.inject(this)
-    super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
 
-    initUi()
+        initUi()
 
-    //Will log tview user clicks for analytics.
-    //app_name_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
+        refreshMoodList()
+
+        //Will log tview user clicks for analytics.
+        //app_name_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
 
 //    start_button.clicks()
 //        .debounce(200, MILLISECONDS)
@@ -80,11 +84,11 @@ class MainScreen : BaseActivity() {
 //        .subscribe()
 //        .addTo(compositeDisposable)
 
-  }
+    }
 
-  //Dirble.com is dead unfortunately !
+    //Dirble.com is dead unfortunately !
 
-  //  private fun initUi() {
+    //  private fun initUi() {
 //    moodListView.setHasFixedSize(true)
 //    moodListView.layoutManager = LinearLayoutManager(this@MainScreen)
 //
@@ -98,23 +102,24 @@ class MainScreen : BaseActivity() {
 //      .subscribe()
 //      .addTo(compositeDisposable)
 //  }
-  private fun initUi() {
+    private fun initUi() {
+        moodListView.setHasFixedSize(true)
+        moodListView.layoutManager = LinearLayoutManager(this@MainScreen)
+        moodListView.adapter = moodAdapter
+    }
 
-    moodListView.setHasFixedSize(true)
-    moodListView.layoutManager = LinearLayoutManager(this@MainScreen)
-    moodListView.adapter = moodAdapter
-
-
-    radioBrowserDirectoryServices.getAllTags(true)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        //TODO: Now filter-out very popular tags and work on them only
-        .doOnNext {
-          moodAdapter.update(it.toMutableList())
-        }
-        .doOnError { Timber.e(it.cause) }
-        .subscribe()
-        .addTo(compositeDisposable)
-
-  }
+    private fun refreshMoodList() {
+        radioBrowserDirectoryServices.getAllTags(true)
+            .doOnError { Timber.e(it.cause) }
+            .flatMap {
+                Observable.fromArray(it.sortedWith(compareByDescending(RadioBrowserTagsRsp::stationCount)))
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext {
+                moodAdapter.update(it)
+            }
+            .subscribe()
+            .addTo(compositeDisposable)
+    }
 }
