@@ -1,6 +1,6 @@
-package com.post2shyam.abcd.screens.main.internal.dagger
+package com.post2shyam.abcd.screens.mood.internal.dagger
 
-import com.post2shyam.abcd.screens.main.internal.MoodAdapter
+import com.post2shyam.abcd.screens.mood.internal.MoodAdapter
 import dagger.Module
 import dagger.Provides
 

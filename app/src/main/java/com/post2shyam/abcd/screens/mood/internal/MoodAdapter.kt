@@ -1,4 +1,4 @@
-package com.post2shyam.abcd.screens.main.internal
+package com.post2shyam.abcd.screens.mood.internal
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,8 +1,8 @@
 package com.post2shyam.abcd.screens.internal.dagger
 
-import com.post2shyam.abcd.screens.main.MainScreen
-import com.post2shyam.abcd.screens.main.internal.dagger.MoodModule
-import com.post2shyam.abcd.screens.splash.Splash
+import com.post2shyam.abcd.screens.mood.MoodListActivity
+import com.post2shyam.abcd.screens.mood.internal.dagger.MoodModule
+import com.post2shyam.abcd.screens.splash.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,9 +10,9 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityModule {
 
   @ContributesAndroidInjector(modules = [MoodModule::class])
-  internal abstract fun contributeFirstActivity(): MainScreen
+  internal abstract fun contributeMoodListActivity(): MoodListActivity
 
   @ContributesAndroidInjector
-  internal abstract fun contributeSplashActivity(): Splash
+  internal abstract fun contributeSplashActivity(): SplashActivity
   // Add bindings for other sub-components here
 }

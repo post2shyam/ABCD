@@ -1,4 +1,4 @@
-package com.post2shyam.abcd.screens.main
+package com.post2shyam.abcd.screens.mood
 
 import android.content.Intent
 import android.media.MediaPlayer
@@ -10,7 +10,7 @@ import com.post2shyam.abcd.R
 import com.post2shyam.abcd.backend.radiobrowser.RadioBrowserDirectoryServices
 import com.post2shyam.abcd.backend.radiobrowser.response.RadioBrowserTagsRsp
 import com.post2shyam.abcd.screens.internal.BaseActivity
-import com.post2shyam.abcd.screens.main.internal.MoodAdapter
+import com.post2shyam.abcd.screens.mood.internal.MoodAdapter
 import com.post2shyam.abcd.utils.addTo
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainScreen : BaseActivity() {
+class MoodListActivity : BaseActivity() {
 
     override val layoutRes = R.layout.activity_mainscreen
 
@@ -29,9 +29,6 @@ class MainScreen : BaseActivity() {
     @Inject
     lateinit var moodAdapter: MoodAdapter
 
-//    @Inject
-//    lateinit var dirbleRadioDirectoryServices: DirbleRadioDirectoryServices
-
     @Inject
     lateinit var radioBrowserDirectoryServices: RadioBrowserDirectoryServices
 
@@ -39,7 +36,7 @@ class MainScreen : BaseActivity() {
 
     companion object {
         fun launch(baseActivity: BaseActivity) {
-            val intent = Intent(baseActivity, MainScreen::class.java)
+            val intent = Intent(baseActivity, MoodListActivity::class.java)
             baseActivity.startActivity(intent)
             baseActivity.finish()
         }
@@ -90,7 +87,7 @@ class MainScreen : BaseActivity() {
 
     //  private fun initUi() {
 //    moodListView.setHasFixedSize(true)
-//    moodListView.layoutManager = LinearLayoutManager(this@MainScreen)
+//    moodListView.layoutManager = LinearLayoutManager(this@MoodListActivity)
 //
 //    dirbleRadioDirectoryServices.popularStations(0, 10, 0)
 //      .subscribeOn(Schedulers.io())
@@ -104,7 +101,7 @@ class MainScreen : BaseActivity() {
 //  }
     private fun initUi() {
         moodListView.setHasFixedSize(true)
-        moodListView.layoutManager = LinearLayoutManager(this@MainScreen)
+        moodListView.layoutManager = LinearLayoutManager(this@MoodListActivity)
         moodListView.adapter = moodAdapter
     }
 
