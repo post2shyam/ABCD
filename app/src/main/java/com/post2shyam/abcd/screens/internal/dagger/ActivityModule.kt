@@ -1,13 +1,15 @@
 package com.post2shyam.abcd.screens.internal.dagger
 
 import com.post2shyam.abcd.screens.main.MainScreen
+import com.post2shyam.abcd.screens.main.internal.dagger.MoodModule
 import com.post2shyam.abcd.screens.splash.Splash
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ActivityModule {
-  @ContributesAndroidInjector
+
+  @ContributesAndroidInjector(modules = [MoodModule::class])
   internal abstract fun contributeFirstActivity(): MainScreen
 
   @ContributesAndroidInjector
