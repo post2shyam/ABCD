@@ -100,9 +100,15 @@ class MoodListActivity : BaseActivity() {
 //      .addTo(compositeDisposable)
 //  }
     private fun initUi() {
+
+        moodAdapter.itemViewClickEvent.subscribe { radioBrowserTagsRsp ->
+            Timber.d("Clicked !!. View %s", radioBrowserTagsRsp.tag)
+        }
+
         moodListView.setHasFixedSize(true)
         moodListView.layoutManager = LinearLayoutManager(this@MoodListActivity)
         moodListView.adapter = moodAdapter
+
     }
 
     private fun refreshMoodList() {
