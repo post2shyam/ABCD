@@ -9,7 +9,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.post2shyam.abcd"
+        applicationId "com.post2shyam.reverbuzzy"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
