@@ -11,6 +11,7 @@ import com.post2shyam.reverbuzzy.backend.radiobrowser.RadioBrowserDirectoryServi
 import com.post2shyam.reverbuzzy.backend.radiobrowser.response.RadioBrowserTagsRsp
 import com.post2shyam.reverbuzzy.screens.internal.BaseActivity
 import com.post2shyam.reverbuzzy.screens.mood.internal.MoodAdapter
+import com.post2shyam.reverbuzzy.screens.stationlist.StationListActivity
 import com.post2shyam.reverbuzzy.utils.addTo
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
@@ -21,42 +22,42 @@ import javax.inject.Inject
 
 class MoodListActivity : BaseActivity() {
 
-    override val layoutRes = R.layout.activity_mainscreen
+  override val layoutRes = R.layout.activity_moodlist
 
-    @BindView(R.id.mood_list)
-    lateinit var moodListView: RecyclerView
+  @BindView(R.id.mood_list)
+  lateinit var moodListView: RecyclerView
 
-    @Inject
-    lateinit var moodAdapter: MoodAdapter
+  @Inject
+  lateinit var moodAdapter: MoodAdapter
 
-    @Inject
-    lateinit var radioBrowserDirectoryServices: RadioBrowserDirectoryServices
+  @Inject
+  lateinit var radioBrowserDirectoryServices: RadioBrowserDirectoryServices
 
-    private val mediaPlayer = MediaPlayer()
+  private val mediaPlayer = MediaPlayer()
 
-    companion object {
-        fun launch(baseActivity: BaseActivity) {
-            val intent = Intent(baseActivity, MoodListActivity::class.java)
-            baseActivity.startActivity(intent)
-            baseActivity.finish()
-        }
+  companion object {
+    fun launch(baseActivity: BaseActivity) {
+      val intent = Intent(baseActivity, MoodListActivity::class.java)
+      baseActivity.startActivity(intent)
+      baseActivity.finish()
     }
+  }
 
-    override fun onDestroy() {
-        mediaPlayer.release()
-        super.onDestroy()
-    }
+  override fun onDestroy() {
+    mediaPlayer.release()
+    super.onDestroy()
+  }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    AndroidInjection.inject(this)
+    super.onCreate(savedInstanceState)
 
-        initUi()
+    initUi()
 
-        refreshMoodList()
+    refreshMoodList()
 
-        //Will log tview user clicks for analytics.
-        //app_name_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
+    //Will log tview user clicks for analytics.
+    //app_name_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
 
 //    start_button.clicks()
 //        .debounce(200, MILLISECONDS)
@@ -81,48 +82,51 @@ class MoodListActivity : BaseActivity() {
 //        .subscribe()
 //        .addTo(compositeDisposable)
 
-    }
+  }
 
-    //Dirble.com is dead unfortunately !
+  //Dirble.com is dead unfortunately !
 
-    //  private fun initUi() {
-//    moodListView.setHasFixedSize(true)
-//    moodListView.layoutManager = LinearLayoutManager(this@MoodListActivity)
+  //  private fun initUi() {
+//    stationListView.setHasFixedSize(true)
+//    stationListView.layoutManager = LinearLayoutManager(this@MoodListActivity)
 //
 //    dirbleRadioDirectoryServices.popularStations(0, 10, 0)
 //      .subscribeOn(Schedulers.io())
 //      .observeOn(AndroidSchedulers.mainThread())
 //      .doOnNext {
-//        moodListView.adapter = MoodAdapter(it)
+//        stationListView.adapter = MoodAdapter(it)
 //      }
 //      .doOnError { Timber.e(it.cause) }
 //      .subscribe()
 //      .addTo(compositeDisposable)
 //  }
-    private fun initUi() {
+  private fun initUi() {
 
-        moodAdapter.itemViewClickEvent.subscribe { radioBrowserTagsRsp ->
-            Timber.d("Clicked !!. View %s", radioBrowserTagsRsp.tag)
+    moodAdapter.itemViewClickEvent.subscribe { radioBrowserTagsRsp ->
+      StationListActivity.launch(this, radioBrowserTagsRsp.tag)
+    }
+        .addTo(compositeDisposable)
+
+    moodListView.setHasFixedSize(true)
+    moodListView.layoutManager = LinearLayoutManager(this@MoodListActivity)
+    moodListView.adapter = moodAdapter
+
+  }
+
+  private fun refreshMoodList() {
+    radioBrowserDirectoryServices.getAllTags(true)
+        .doOnError { Timber.e(it.cause) }
+        .flatMap {
+          Observable.fromArray(
+              it.sortedWith(compareByDescending(RadioBrowserTagsRsp::stationCount))
+          )
         }
-
-        moodListView.setHasFixedSize(true)
-        moodListView.layoutManager = LinearLayoutManager(this@MoodListActivity)
-        moodListView.adapter = moodAdapter
-
-    }
-
-    private fun refreshMoodList() {
-        radioBrowserDirectoryServices.getAllTags(true)
-            .doOnError { Timber.e(it.cause) }
-            .flatMap {
-                Observable.fromArray(it.sortedWith(compareByDescending(RadioBrowserTagsRsp::stationCount)))
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext {
-                moodAdapter.update(it)
-            }
-            .subscribe()
-            .addTo(compositeDisposable)
-    }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .doOnNext {
+          moodAdapter.update(it)
+        }
+        .subscribe()
+        .addTo(compositeDisposable)
+  }
 }

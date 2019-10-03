@@ -58,14 +58,14 @@ interface RadioBrowserDirectoryServices {
     ) entryCount: String
   ): Observable<Array<RadioBrowserRadioStationRsp>>
 
-  //Stations by tag
+  //Stations
   @FormUrlEncoded
-  @POST("stations/tag/{tag}")
-  fun getStationListByTag(
+  @POST("stations/search")
+  fun getStationList(
     @Field("reverse") inReverseOrder: Boolean,
+    @Field("tag") tag: String,
     @Field("offset") startOffset: Int,
-    @Field("limit") itemCount: Int,
-    @Path("tag") genre: String
+    @Field("limit") itemCount: Int
   ): Observable<Array<RadioBrowserRadioStationRsp>>
 
   //Get playable station url

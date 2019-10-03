@@ -57,7 +57,7 @@ class MoodAdapter : RecyclerView.Adapter<MoodAdapter.MoodViewHolder>() {
 
     class MoodViewHolder(parentView: View) : RecyclerView.ViewHolder(parentView) {
 
-        @BindView(R.id.station_count)
+        @BindView(R.id.station_name)
         lateinit var stationCount: AppCompatTextView
 
         @BindView(R.id.mood_title)
