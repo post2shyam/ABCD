@@ -11,6 +11,7 @@ import butterknife.ButterKnife
 import com.jakewharton.rxbinding3.view.clicks
 import com.post2shyam.reverbuzzy.R
 import com.post2shyam.reverbuzzy.backend.radiobrowser.response.RadioBrowserRadioStationRsp
+import com.squareup.picasso.Picasso
 import io.reactivex.subjects.PublishSubject
 
 class StationListAdapter : RecyclerView.Adapter<StationListAdapter.ViewHolder>() {
@@ -40,6 +41,18 @@ class StationListAdapter : RecyclerView.Adapter<StationListAdapter.ViewHolder>()
     viewHolder: ViewHolder,
     position: Int
   ) {
+      //Load the image view
+      val faviconUri = stationList[position].favicon
+      val picassoInstance = if (faviconUri.isEmpty())
+          Picasso.get().load(R.drawable.ic_24px)
+      else
+          Picasso.get().load(faviconUri)
+
+      picassoInstance
+          .placeholder(R.drawable.ic_24px)
+          .error(R.drawable.ic_24px)
+          .into(viewHolder.stationImage)
+
     viewHolder.stationName.text = stationList[position].name
     viewHolder.itemView.clicks() //viewHolder.itemView here You have access to view
         .map { stationList[position] }

@@ -1,31 +1,21 @@
 package com.post2shyam.reverbuzzy.backend.radiobrowser
 
-import com.post2shyam.reverbuzzy.backend.radiobrowser.response.RadioBrowserCountryCodesRsp
-import com.post2shyam.reverbuzzy.backend.radiobrowser.response.RadioBrowserLanguageRsp
-import com.post2shyam.reverbuzzy.backend.radiobrowser.response.RadioBrowserPlayableStationRsp
-import com.post2shyam.reverbuzzy.backend.radiobrowser.response.RadioBrowserRadioStationRsp
-import com.post2shyam.reverbuzzy.backend.radiobrowser.response.RadioBrowserStatesRsp
-import com.post2shyam.reverbuzzy.backend.radiobrowser.response.RadioBrowserTagsRsp
-import com.post2shyam.reverbuzzy.backend.radiobrowser.response.RadioBrowserVoteRsp
+import com.post2shyam.reverbuzzy.backend.radiobrowser.response.*
 import io.reactivex.Observable
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
-const val RADIO_BROWERSER_BASE_URL = "http://www.radio-browser.info/webservice/json/"
+const val RADIO_BROWERSER_BASE_URL = "http://www.radio-browser.info/webservice/"
 
 interface RadioBrowserDirectoryServices {
 
   //List APIs
   //Get all country codes
-  @GET("countrycodes")
+  @GET("json/countrycodes")
   fun getAllCountryCodes(): Observable<Array<RadioBrowserCountryCodesRsp>>
 
   //Get states (of a country)
   @FormUrlEncoded
-  @POST("states/{countryCode}")
+  @POST("json/states/{countryCode}")
   fun getStatesWithCountry(
     @Field("reverse") reverse: Boolean,
     @Field("hidebroken") showBrokenStations: Boolean,
@@ -34,7 +24,7 @@ interface RadioBrowserDirectoryServices {
 
   //Get all languages
   @FormUrlEncoded
-  @POST("languages")
+  @POST("json/languages")
   fun getAllLanguages(
     @Field("reverse") reverse: Boolean,
     @Field("hidebroken") showBrokenStations: Boolean
@@ -42,7 +32,7 @@ interface RadioBrowserDirectoryServices {
 
   //Get all tags
   @FormUrlEncoded
-  @POST("tags")
+  @POST("json/tags")
   fun getAllTags(
     @Field(
         "hidebroken"
@@ -51,7 +41,7 @@ interface RadioBrowserDirectoryServices {
 
   //Station APIS
   // Get stations by max vote
-  @GET("stations/topvote/{entryCount}")
+  @GET("json/stations/topvote/{entryCount}")
   fun topVotedStations(
     @Path(
         "entryCount"
@@ -60,7 +50,7 @@ interface RadioBrowserDirectoryServices {
 
   //Stations
   @FormUrlEncoded
-  @POST("stations/search")
+  @POST("json/stations/search")
   fun getStationList(
     @Field("reverse") inReverseOrder: Boolean,
     @Field("tag") tag: String,
@@ -69,7 +59,7 @@ interface RadioBrowserDirectoryServices {
   ): Observable<Array<RadioBrowserRadioStationRsp>>
 
   //Get playable station url
-  @GET("url/{url/stationid}")
+  @GET("v2/json/url/{stationid}")
   fun getPlayableStationUrl(
     @Path(
         "stationid"
@@ -78,7 +68,7 @@ interface RadioBrowserDirectoryServices {
 
   //Modify APIs
   //Vote for station
-  @GET("vote/{stationId}")
+  @GET("json/vote/{stationId}")
   fun voteForStation(@Path("stationId") stationId: String): Observable<RadioBrowserVoteRsp>
 
 }

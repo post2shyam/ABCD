@@ -1,7 +1,6 @@
 package com.post2shyam.reverbuzzy.screens.mood
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,19 +32,12 @@ class MoodListActivity : BaseActivity() {
   @Inject
   lateinit var radioBrowserDirectoryServices: RadioBrowserDirectoryServices
 
-  private val mediaPlayer = MediaPlayer()
-
   companion object {
     fun launch(baseActivity: BaseActivity) {
       val intent = Intent(baseActivity, MoodListActivity::class.java)
       baseActivity.startActivity(intent)
       baseActivity.finish()
     }
-  }
-
-  override fun onDestroy() {
-    mediaPlayer.release()
-    super.onDestroy()
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
