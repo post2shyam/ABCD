@@ -14,37 +14,40 @@ import javax.inject.Singleton
 @Module
 class RadioBrowserBackendModule {
 
-    @Singleton
-    @Provides
-    fun providesHTTPInterceptor(): HttpLoggingInterceptor {
-        //TODO: Modify logging level for release and debug variants
-        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+  @Singleton
+  @Provides
+  fun providesHTTPInterceptor(): HttpLoggingInterceptor {
+    //TODO: Modify logging level for release and debug variants
+    val httpLoggingInterceptor = HttpLoggingInterceptor()
+    return httpLoggingInterceptor.apply {
+      httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
     }
+  }
 
-    @Singleton
-    @Provides
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
-    }
+  @Singleton
+  @Provides
+  fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    return OkHttpClient.Builder()
+        .addInterceptor(httpLoggingInterceptor)
+        .build()
+  }
 
-    @Singleton
-    @Provides
-    fun provideDirbleRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(RADIO_BROWERSER_BASE_URL)
-            .client(okHttpClient)
-            //Read the gson responses
-            .addConverterFactory(GsonConverterFactory.create())
-            //Invoke via RxJava observables
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-    }
+  @Singleton
+  @Provides
+  fun provideDirbleRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    return Retrofit.Builder()
+        .baseUrl(RADIO_BROWERSER_BASE_URL)
+        .client(okHttpClient)
+        //Read the gson responses
+        .addConverterFactory(GsonConverterFactory.create())
+        //Invoke via RxJava observables
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .build()
+  }
 
-    @Singleton
-    @Provides
-    fun providesRadioBrowserDirectoryServices(retrofit: Retrofit): RadioBrowserDirectoryServices {
-        return retrofit.create(RadioBrowserDirectoryServices::class.java)
-    }
+  @Singleton
+  @Provides
+  fun providesRadioBrowserDirectoryServices(retrofit: Retrofit): RadioBrowserDirectoryServices {
+    return retrofit.create(RadioBrowserDirectoryServices::class.java)
+  }
 }

@@ -8,7 +8,7 @@ class DirbleRequestInterceptor(private val token: String) : Interceptor {
   override fun intercept(chain: Chain): Response {
     val request = chain.request()
 
-    val url = request.url()
+    val url = request.url
       .newBuilder()
       .addQueryParameter("token", token)
       .build()
