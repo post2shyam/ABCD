@@ -45,14 +45,14 @@ class StationListActivity : BaseActivity() {
 
   companion object {
 
-    const val TAG: String = "TAG"
+    const val MOOD_TAG: String = "MOOD_TAG"
 
     fun launch(
       baseActivity: BaseActivity,
-      tag: String
+      moodTag: String
     ) {
       val intent = Intent(baseActivity, StationListActivity::class.java)
-      intent.putExtra(TAG, tag)
+      intent.putExtra(MOOD_TAG, moodTag)
       baseActivity.startActivity(intent)
       baseActivity.finish()
     }
@@ -85,21 +85,14 @@ class StationListActivity : BaseActivity() {
               .subscribeOn(Schedulers.io())
         }
         .doOnNext {
-          //          mediaPlayer.apply {
-//            Timber.d(it.stationUrl)
-//            //setAudioStreamType(AudioManager.STREAM_MUSIC)
-//            setDataSource(it.stationUrl)
-//            prepare() // takes long! (for buffering, etc)
-//            start()
-//
-          val mediaSource = buildMediaSource(it.stationUrl)
-          exoPlayer?.prepare(mediaSource)
-
+          exoPlayer?.prepare(buildMediaSource(it.stationUrl))
         }
-
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(
-            { exoPlayer!!.playWhenReady = true },
+            {
+              //Play the media when its ready !!
+              exoPlayer!!.playWhenReady = true
+            },
             { exception ->
               Toast.makeText(this, exception.localizedMessage, Toast.LENGTH_SHORT)
                   .show()
@@ -109,12 +102,11 @@ class StationListActivity : BaseActivity() {
     stationListView.setHasFixedSize(true)
     stationListView.layoutManager = LinearLayoutManager(this@StationListActivity)
     stationListView.adapter = stationListAdapter
-
   }
 
   private fun refreshStationList() {
     //Based on the current mood populate the list
-    val tag = intent.extras?.getString(TAG)
+    val tag = intent.extras?.getString(MOOD_TAG)
     radioBrowserDirectoryServices
         .getStationList(true, tag!!, 0, 100) //TODO: NPE possibility here
         .doOnError { Timber.e(it.cause) }
