@@ -59,7 +59,7 @@ class StationListActivity : BaseActivity() {
   }
 
   override fun onDestroy() {
-    mediaPlayer.release()
+    releasePlayer()
     super.onDestroy()
   }
 
@@ -127,15 +127,6 @@ class StationListActivity : BaseActivity() {
   }
 
   private fun buildMediaSource(url: String): ExtractorMediaSource? {
-
-//    val extractorsFactory = DefaultExtractorsFactory()
-//    val dateSourceFactory =
-//      DefaultDataSourceFactory(this, getUserAgent(this, packageName), bandwidthMeter)
-
-//    val mediaSource = ExtractorMediaSource(
-//        Uri.parse(url), dateSourceFactory, extractorsFactory, Handler(),
-//        EventListener { it.printStackTrace() })    // replace Uri with your song url
-
     val audioUri = Uri.parse(url)
     val defaultHttpDataSourceFactory = DefaultHttpDataSourceFactory("user-agent")
     return ExtractorMediaSource.Factory(defaultHttpDataSourceFactory)
