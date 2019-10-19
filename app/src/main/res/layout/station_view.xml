@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/material_dimen80"
+    android:paddingStart="@dimen/material_size_16"
+    android:paddingEnd="@dimen/material_size_16"
     >
 
   <androidx.appcompat.widget.AppCompatImageView
@@ -18,11 +20,14 @@
 
   <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/station_name"
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="match_parent"
-      android:gravity="center"
+      android:layout_marginStart="@dimen/material_size_16"
+      android:gravity="start|center"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@id/fav_icon"
+      app:layout_constraintWidth_default="spread"
       tools:text="station name"
       />
 
