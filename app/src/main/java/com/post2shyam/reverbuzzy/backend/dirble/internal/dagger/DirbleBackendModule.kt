@@ -26,7 +26,10 @@ class DirbleBackendModule {
   @Provides
   fun providesHTTPInterceptor(): HttpLoggingInterceptor {
     //TODO: Modify logging level for release and debug variants
-    return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    val httpLoggingInterceptor = HttpLoggingInterceptor()
+    return httpLoggingInterceptor.apply {
+      httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+    }
   }
 
   @Singleton

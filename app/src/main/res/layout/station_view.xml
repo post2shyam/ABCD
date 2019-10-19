@@ -3,30 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="start"
+    android:layout_height="@dimen/material_dimen80"
     >
 
-  <androidx.appcompat.widget.AppCompatTextView
-      android:id="@+id/mood_title"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="start"
-      app:layout_constraintEnd_toEndOf="parent"
+  <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/fav_icon"
+      android:layout_width="@dimen/material_dimen80"
+      android:layout_height="@dimen/material_dimen80"
+      android:gravity="center"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      tools:text="mood"
       />
 
   <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/station_name"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="start"
+      android:layout_height="match_parent"
+      android:gravity="center"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/mood_title"
-      tools:text="station count"
+      app:layout_constraintStart_toEndOf="@id/fav_icon"
+      tools:text="station name"
       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

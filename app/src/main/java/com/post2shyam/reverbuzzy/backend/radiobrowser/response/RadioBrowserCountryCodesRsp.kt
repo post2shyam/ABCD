@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class RadioBrowserCountryCodesRsp(
-    @SerializedName("stationCount")
+  @SerializedName("stationName")
     val stationCount: String,
 
     @SerializedName("value")

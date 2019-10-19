@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class RadioBrowserRadioStationRsp(
+
     @SerializedName("bitrate")
     val bitrate: String,
 

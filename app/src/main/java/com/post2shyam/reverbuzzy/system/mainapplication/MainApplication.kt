@@ -1,6 +1,6 @@
 package com.post2shyam.reverbuzzy.system.mainapplication
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 private const val DEFAULT_FONT = "fonts/Roboto-RobotoRegular.ttf"
 
-class MainApplication : Application(), HasAndroidInjector {
+class MainApplication : MultiDexApplication(), HasAndroidInjector {
 
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Any>
