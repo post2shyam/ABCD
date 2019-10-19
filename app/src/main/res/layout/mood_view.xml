@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/material_dimen48"
     android:layout_gravity="start"
+    android:paddingStart="@dimen/material_dimen16"
+    android:paddingEnd="@dimen/material_dimen16"
     >
 
   <androidx.appcompat.widget.AppCompatTextView

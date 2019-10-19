@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/material_dimen80"
-    android:paddingStart="@dimen/material_size_16"
-    android:paddingEnd="@dimen/material_size_16"
+    android:paddingStart="@dimen/material_dimen16"
+    android:paddingEnd="@dimen/material_dimen16"
     >
 
   <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/fav_icon"
-      android:layout_width="@dimen/material_dimen80"
-      android:layout_height="@dimen/material_dimen80"
+      android:layout_width="@dimen/material_dimen72"
+      android:layout_height="@dimen/material_dimen72"
       android:gravity="center"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
       android:id="@+id/station_name"
       android:layout_width="0dp"
       android:layout_height="match_parent"
-      android:layout_marginStart="@dimen/material_size_16"
+      android:layout_marginStart="@dimen/material_dimen16"
       android:gravity="start|center"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
