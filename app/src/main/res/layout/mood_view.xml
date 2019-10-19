@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/material_dimen48"
     android:layout_gravity="start"
+    android:paddingStart="@dimen/material_dimen16"
+    android:paddingEnd="@dimen/material_dimen16"
     >
 
   <androidx.appcompat.widget.AppCompatTextView
@@ -12,6 +14,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:gravity="start"
+      android:textSize="@dimen/material_size_16"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -23,6 +26,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:gravity="start"
+      android:textSize="@dimen/material_size_16"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/mood_title"
