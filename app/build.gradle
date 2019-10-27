@@ -10,7 +10,7 @@ android {
   compileSdkVersion 28
   defaultConfig {
     applicationId "com.post2shyam.reverbuzzy"
-    minSdkVersion 19
+    minSdkVersion 21
     targetSdkVersion 28
     multiDexEnabled true
     versionCode 1

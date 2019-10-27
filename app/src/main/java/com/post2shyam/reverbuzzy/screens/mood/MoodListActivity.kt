@@ -47,53 +47,9 @@ class MoodListActivity : BaseActivity() {
     initUi()
 
     refreshMoodList()
-
-    //Will log tview user clicks for analytics.
-    //app_name_tview.setOnClickListener { view -> Timber.d("%s", view.tag) }
-
-//    start_button.clicks()
-//        .debounce(200, MILLISECONDS)
-//        .switchMap {
-//          dirbleRadioDirectoryServices.popularStations(0, 10, 0)
-//              .subscribeOn(Schedulers.io())
-//              .doOnNext { popularRadioStations: Array<PopularStationsRsp>? ->
-//                Timber.d("Ok")
-//                val url = popularRadioStations?.get(4)
-//                    ?.streams?.get(0)
-//                    ?.stream
-//                mediaPlayer.apply {
-//                  setAudioStreamType(AudioManager.STREAM_MUSIC)
-//                  setDataSource(url)
-//                  prepare() // takes long! (for buffering, etc)
-//                  start()
-//                }
-//              }
-//        }
-//        .observeOn(AndroidSchedulers.mainThread())
-//        .doOnError { Timber.e(it.cause) }
-//        .subscribe()
-//        .addTo(compositeDisposable)
-
   }
 
-  //Dirble.com is dead unfortunately !
-
-  //  private fun initUi() {
-//    stationListView.setHasFixedSize(true)
-//    stationListView.layoutManager = LinearLayoutManager(this@MoodListActivity)
-//
-//    dirbleRadioDirectoryServices.popularStations(0, 10, 0)
-//      .subscribeOn(Schedulers.io())
-//      .observeOn(AndroidSchedulers.mainThread())
-//      .doOnNext {
-//        stationListView.adapter = MoodAdapter(it)
-//      }
-//      .doOnError { Timber.e(it.cause) }
-//      .subscribe()
-//      .addTo(compositeDisposable)
-//  }
   private fun initUi() {
-
     moodAdapter.itemViewClickEvent.subscribe { radioBrowserTagsRsp ->
       StationListActivity.launch(this, radioBrowserTagsRsp.tag)
     }
