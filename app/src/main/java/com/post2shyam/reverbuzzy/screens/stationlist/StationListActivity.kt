@@ -1,7 +1,6 @@
 package com.post2shyam.reverbuzzy.screens.stationlist
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -42,8 +41,6 @@ class StationListActivity : BaseActivity() {
   @Inject
   lateinit var radioBrowserDirectoryServices: RadioBrowserDirectoryServices
 
-  private val mediaPlayer = MediaPlayer()
-
   companion object {
 
     const val MOOD_TAG: String = "MOOD_TAG"
@@ -55,7 +52,6 @@ class StationListActivity : BaseActivity() {
       val intent = Intent(baseActivity, StationListActivity::class.java)
       intent.putExtra(MOOD_TAG, moodTag)
       baseActivity.startActivity(intent)
-      baseActivity.finish()
     }
   }
 
