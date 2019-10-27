@@ -34,7 +34,7 @@ class RadioBrowserBackendModule {
 
   @Singleton
   @Provides
-  fun provideDirbleRetrofit(okHttpClient: OkHttpClient): Retrofit {
+  fun provideRadioBrowserRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .baseUrl(RADIO_BROWERSER_BASE_URL)
         .client(okHttpClient)

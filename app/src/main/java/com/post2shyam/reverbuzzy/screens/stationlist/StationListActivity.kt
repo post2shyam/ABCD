@@ -8,11 +8,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
-import com.google.android.exoplayer2.ExoPlayerFactory
-import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.source.ExtractorMediaSource
+import com.google.android.exoplayer2.source.TrackGroupArray
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.trackselection.TrackSelectionArray
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.post2shyam.reverbuzzy.R
@@ -64,14 +65,16 @@ class StationListActivity : BaseActivity() {
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    AndroidInjection.inject(this)
-    super.onCreate(savedInstanceState)
 
-    preparePlayer()
+    AndroidInjection.inject(this)
+
+    super.onCreate(savedInstanceState)
 
     initUi()
 
     refreshStationList()
+
+    preparePlayer()
   }
 
   private fun initUi() {
@@ -120,10 +123,65 @@ class StationListActivity : BaseActivity() {
   }
 
   private fun preparePlayer() {
+
     val bandwidthMeter = DefaultBandwidthMeter()
+
     val trackSelectionFactory = AdaptiveTrackSelection.Factory(bandwidthMeter)
+
     exoPlayer =
       ExoPlayerFactory.newSimpleInstance(this, DefaultTrackSelector(trackSelectionFactory))
+
+
+    exoPlayer?.addListener(object : Player.EventListener {
+      override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters?) {
+        //TODO
+      }
+
+      override fun onSeekProcessed() {
+        //TODO
+      }
+
+      override fun onTracksChanged(
+        trackGroups: TrackGroupArray?,
+        trackSelections: TrackSelectionArray?
+      ) {
+        //TODO
+      }
+
+      override fun onPlayerError(error: ExoPlaybackException?) {
+        //TODO
+      }
+
+      override fun onLoadingChanged(isLoading: Boolean) {
+      }
+
+      override fun onPositionDiscontinuity(reason: Int) {
+      }
+
+      override fun onRepeatModeChanged(repeatMode: Int) {
+      }
+
+      override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {
+      }
+
+      override fun onTimelineChanged(
+        timeline: Timeline?,
+        manifest: Any?,
+        reason: Int
+      ) {
+      }
+
+      override fun onPlayerStateChanged(
+        playWhenReady: Boolean,
+        playbackState: Int
+      ) {
+        when (playbackState) {
+          Player.STATE_BUFFERING -> Timber.d("Show buffering snack bar")
+          Player.STATE_ENDED, Player.STATE_IDLE, Player.STATE_READY ->
+            if (playWhenReady) Timber.d("Dismiss snack bar. For both error and success conditions")
+        }
+      }
+    })
   }
 
   private fun buildMediaSource(url: String): ExtractorMediaSource? {
