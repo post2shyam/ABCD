@@ -39,7 +39,7 @@ class StationListActivity : BaseActivity() {
 
   private lateinit var playbackErrorSnackbar: Snackbar
 
-  private var exoPlayer: SimpleExoPlayer? = null
+  private lateinit var exoPlayer: SimpleExoPlayer
 
   override val layoutRes = R.layout.activity_stationlist
 
@@ -104,13 +104,13 @@ class StationListActivity : BaseActivity() {
               .subscribeOn(Schedulers.io())
         }
         .doOnNext {
-          exoPlayer?.prepare(buildMediaSource(it.stationUrl))
+          exoPlayer.prepare(buildMediaSource(it.stationUrl))
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(
             {
               //Play the media when its ready !!
-              exoPlayer!!.playWhenReady = true
+              exoPlayer.playWhenReady = true
             },
             { exception ->
               Toast.makeText(this, exception.localizedMessage, Toast.LENGTH_SHORT)
@@ -148,7 +148,7 @@ class StationListActivity : BaseActivity() {
       ExoPlayerFactory.newSimpleInstance(this, DefaultTrackSelector(trackSelectionFactory))
 
 
-    exoPlayer?.addListener(object : Player.EventListener {
+    exoPlayer.addListener(object : Player.EventListener {
       override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters?) {
         //TODO
       }
@@ -208,8 +208,6 @@ class StationListActivity : BaseActivity() {
   }
 
   private fun releasePlayer() {
-    exoPlayer?.release()
-    exoPlayer = null
+    exoPlayer.release()
   }
-
 }
