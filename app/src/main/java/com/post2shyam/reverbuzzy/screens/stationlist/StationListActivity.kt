@@ -4,10 +4,16 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
-import com.google.android.exoplayer2.*
+import com.google.android.exoplayer2.ExoPlaybackException
+import com.google.android.exoplayer2.ExoPlayerFactory
+import com.google.android.exoplayer2.PlaybackParameters
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.Timeline
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.TrackGroupArray
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
@@ -15,6 +21,7 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
+import com.google.android.material.snackbar.Snackbar
 import com.post2shyam.reverbuzzy.R
 import com.post2shyam.reverbuzzy.backend.radiobrowser.RadioBrowserDirectoryServices
 import com.post2shyam.reverbuzzy.screens.internal.BaseActivity
@@ -28,9 +35,16 @@ import javax.inject.Inject
 
 class StationListActivity : BaseActivity() {
 
+  private lateinit var bufferingSnackbar: Snackbar
+
+  private lateinit var playbackErrorSnackbar: Snackbar
+
   private var exoPlayer: SimpleExoPlayer? = null
 
   override val layoutRes = R.layout.activity_stationlist
+
+  @BindView(R.id.parent_layout)
+  lateinit var parentViewGroup: ConstraintLayout
 
   @BindView(R.id.mood_list)
   lateinit var stationListView: RecyclerView
@@ -74,6 +88,12 @@ class StationListActivity : BaseActivity() {
   }
 
   private fun initUi() {
+
+    bufferingSnackbar = Snackbar
+        .make(parentViewGroup, R.string.buffering, Snackbar.LENGTH_INDEFINITE)
+
+    playbackErrorSnackbar =
+      Snackbar.make(parentViewGroup, R.string.playback_error, Snackbar.LENGTH_SHORT)
 
     stationListAdapter
         .itemViewClickEvent
@@ -145,7 +165,7 @@ class StationListActivity : BaseActivity() {
       }
 
       override fun onPlayerError(error: ExoPlaybackException?) {
-        //TODO
+        playbackErrorSnackbar.show()
       }
 
       override fun onLoadingChanged(isLoading: Boolean) {
@@ -172,9 +192,9 @@ class StationListActivity : BaseActivity() {
         playbackState: Int
       ) {
         when (playbackState) {
-          Player.STATE_BUFFERING -> Timber.d("Show buffering snack bar")
+          Player.STATE_BUFFERING -> bufferingSnackbar.show()
           Player.STATE_ENDED, Player.STATE_IDLE, Player.STATE_READY ->
-            if (playWhenReady) Timber.d("Dismiss snack bar. For both error and success conditions")
+            if (playWhenReady) bufferingSnackbar.dismiss()
         }
       }
     })
