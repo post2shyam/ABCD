@@ -1,7 +1,9 @@
 package com.post2shyam.reverbuzzy.backend.radiobrowser.dagger
 
+import android.app.Application
 import com.post2shyam.reverbuzzy.backend.radiobrowser.RADIO_BROWERSER_BASE_URL
 import com.post2shyam.reverbuzzy.backend.radiobrowser.RadioBrowserDirectoryServices
+import com.post2shyam.reverbuzzy.backend.radiobrowser.internal.UserAgentInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -26,8 +28,18 @@ class RadioBrowserBackendModule {
 
   @Singleton
   @Provides
-  fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+  fun provideUserAgentInterceptor(application: Application): UserAgentInterceptor {
+    return UserAgentInterceptor(application)
+  }
+
+  @Singleton
+  @Provides
+  fun provideOkHttpClient(
+    userAgentInterceptor: UserAgentInterceptor,
+    httpLoggingInterceptor: HttpLoggingInterceptor
+  ): OkHttpClient {
     return OkHttpClient.Builder()
+        .addInterceptor(userAgentInterceptor)
         .addInterceptor(httpLoggingInterceptor)
         .build()
   }
