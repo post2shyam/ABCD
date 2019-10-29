@@ -8,5 +8,5 @@ data class RadioBrowserTagsRsp(
     val stationCount: Int,
 
     @SerializedName("value")
-    val tag: String
+    val mood: String
 )

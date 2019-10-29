@@ -51,7 +51,7 @@ class MoodListActivity : BaseActivity() {
 
   private fun initUi() {
     moodAdapter.itemViewClickEvent.subscribe { radioBrowserTagsRsp ->
-      StationListActivity.launch(this, radioBrowserTagsRsp.tag)
+      StationListActivity.launch(this, radioBrowserTagsRsp.mood)
     }
         .addTo(compositeDisposable)
 
