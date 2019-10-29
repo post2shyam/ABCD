@@ -4,33 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/material_dimen48"
-    android:layout_gravity="start"
-    android:paddingStart="@dimen/material_dimen16"
-    android:paddingEnd="@dimen/material_dimen16"
+    android:layout_marginStart="@dimen/material_dimen16"
+    android:layout_marginEnd="@dimen/material_dimen16"
     >
 
   <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/mood_title"
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:gravity="start"
-      android:textSize="@dimen/material_size_16"
-      app:layout_constraintEnd_toEndOf="parent"
+      android:maxLines="1"
+      android:textSize="@dimen/material_size_24"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/trend_icon"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="mood"
       />
 
-  <androidx.appcompat.widget.AppCompatTextView
-      android:id="@+id/station_name"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="start"
-      android:textSize="@dimen/material_size_16"
+
+  <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/trend_icon"
+      android:layout_width="@dimen/material_dimen48"
+      android:layout_height="@dimen/material_dimen48"
+      android:layout_marginStart="@dimen/material_dimen16"
+      android:layout_marginEnd="@dimen/material_dimen16"
+      android:gravity="center"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/mood_title"
-      tools:text="station count"
+      app:layout_constraintEnd_toStartOf="@id/station_count"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_trending_up"
+      />
+
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/station_count"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:ems="2"
+      android:gravity="center|end"
+      android:textSize="@dimen/material_size_24"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="cnt"
       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

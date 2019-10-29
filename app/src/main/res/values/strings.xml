@@ -4,4 +4,6 @@
   <string name="start">Start</string>
   <string name="token">Token</string>
   <string name="password">Password</string>
+  <string name="buffering">Buffering…</string>
+  <string name="playback_error">Unable to play radio station.</string>
 </resources>
