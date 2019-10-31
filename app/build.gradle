@@ -7,14 +7,30 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+
   compileSdkVersion 28
+
+  //Read app version from properties file
+  def versionPropsFile = file('version.properties')
+  def versionMajor = 0
+  def versionMinor = 1
+  def versionBuild = 1
+
+  if (versionPropsFile.canRead()) {
+    Properties versionProperties = new Properties()
+    versionProperties.load(new FileInputStream(versionPropsFile))
+    versionMajor = versionProperties['VERSION_MAJOR'].toInteger()
+    versionMinor = versionProperties['VERSION_MINOR'].toInteger()
+    versionBuild = versionProperties['VERSION_BUILD'].toInteger()
+  }
+
   defaultConfig {
     applicationId "com.post2shyam.reverbuzzy"
     minSdkVersion 21
     targetSdkVersion 28
     multiDexEnabled true
-    versionCode 1
-    versionName "0.1"
+    versionCode versionBuild
+    versionName "${versionMajor}.${versionMinor}.${versionBuild}"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
   buildTypes {
