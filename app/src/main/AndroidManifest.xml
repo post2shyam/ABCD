@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.post2shyam.reverbuzzy">
 
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.INTERNET" />
+
   <application
       android:name="com.post2shyam.reverbuzzy.system.mainapplication.MainApplication"
       android:allowBackup="true"
@@ -23,8 +26,4 @@
       </intent-filter>
     </activity>
   </application>
-
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.INTERNET" />
-
 </manifest>

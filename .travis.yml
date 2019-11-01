@@ -18,6 +18,9 @@ android:
     - extra-google-m2repository
 licenses:
     - 'android-sdk-license-.+'
+before_script:
+  # Update app version
+  - .travis_buildscript/version_upgrade.sh
 script: ./gradlew assemble
 notifications:
     email: false
