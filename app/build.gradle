@@ -63,7 +63,7 @@ dependencies {
   implementation "androidx.recyclerview:recyclerview:${androidxRecyclerViewVersion}"
   implementation "androidx.multidex:multidex:${androidMultiDexLibVersion}"
   implementation "com.android.support:design:${androidSupportDesign}"
-
+  implementation "androidx.cardview:cardview:${androidCardViewVersion}"
 
   //AppCentre integration
   implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
