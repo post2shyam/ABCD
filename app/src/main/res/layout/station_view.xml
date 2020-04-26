@@ -5,13 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/material_dimen80"
-    android:layout_marginStart="@dimen/material_dimen16"
-    android:layout_marginEnd="@dimen/material_dimen16"
     android:layout_marginBottom="@dimen/material_dimen8"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/colorPrimaryDark"
+    app:cardBackgroundColor="@color/colorAccent"
     app:cardCornerRadius="@dimen/material_dimen8"
     app:cardElevation="@dimen/material_dimen8"
     app:layout_goneMarginEnd="@dimen/material_dimen16"
@@ -21,6 +19,8 @@
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_marginStart="@dimen/material_dimen16"
+      android:layout_marginEnd="@dimen/material_dimen16"
       >
 
     <androidx.appcompat.widget.AppCompatImageView

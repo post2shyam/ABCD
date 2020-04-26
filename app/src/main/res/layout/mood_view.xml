@@ -1,53 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/material_dimen48"
-    android:layout_marginStart="@dimen/material_dimen16"
-    android:layout_marginEnd="@dimen/material_dimen16"
-    >
+    android:layout_height="@dimen/material_dimen80"
+    android:layout_marginBottom="@dimen/material_dimen8"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/colorAccent"
+    app:cardCornerRadius="@dimen/material_dimen8"
+    app:cardElevation="@dimen/material_dimen8"
+    app:layout_goneMarginEnd="@dimen/material_dimen16">
 
-  <androidx.appcompat.widget.AppCompatTextView
-      android:id="@+id/mood_title"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:gravity="start"
-      android:maxLines="1"
-      android:textSize="@dimen/material_size_24"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/trend_icon"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:text="mood"
-      />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/material_dimen16"
+        android:layout_marginEnd="@dimen/material_dimen16">
 
-
-  <androidx.appcompat.widget.AppCompatImageView
-      android:id="@+id/trend_icon"
-      android:layout_width="@dimen/material_dimen48"
-      android:layout_height="@dimen/material_dimen48"
-      android:layout_marginStart="@dimen/material_dimen16"
-      android:layout_marginEnd="@dimen/material_dimen16"
-      android:gravity="center"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/station_count"
-      app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/ic_trending_up"
-      />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mood_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:maxLines="1"
+            android:textSize="@dimen/material_size_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/trend_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="mood" />
 
 
-  <androidx.appcompat.widget.AppCompatTextView
-      android:id="@+id/station_count"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:ems="2"
-      android:gravity="center|end"
-      android:textSize="@dimen/material_size_24"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:text="cnt"
-      />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/trend_icon"
+            android:layout_width="@dimen/material_dimen48"
+            android:layout_height="@dimen/material_dimen48"
+            android:layout_marginStart="@dimen/material_dimen16"
+            android:layout_marginEnd="@dimen/material_dimen16"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/station_count"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_trending_up" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/station_count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="2"
+            android:gravity="center|end"
+            android:textSize="@dimen/material_size_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="cnt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
