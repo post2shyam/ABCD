@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ABCD.iml" filepath="$PROJECT_DIR$/ABCD.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ReverbuZzy.iml" filepath="$PROJECT_DIR$/ReverbuZzy.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/ReverbuZzy-app.iml" filepath="$PROJECT_DIR$/app/ReverbuZzy-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReverbuZzy.iml" filepath="$PROJECT_DIR$/ReverbuZzy.iml" group="ReverbuZzy" />
+      <module fileurl="file://$PROJECT_DIR$/app/ReverbuZzy-app.iml" filepath="$PROJECT_DIR$/app/ReverbuZzy-app.iml" group="ReverbuZzy/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
