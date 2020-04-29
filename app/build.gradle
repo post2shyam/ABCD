@@ -8,7 +8,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
 
-  compileSdkVersion 28
+  compileSdkVersion 29
 
   //Read app version from properties file
   def versionPropsFile = file('version.properties')
